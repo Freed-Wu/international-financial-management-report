@@ -1,0 +1,419 @@
+%&"main"
+% Fakesection 检错
+% Fakesubsubsection 宏包
+\RequirePackage[l2tabu, orthodox]{nag}
+% XXX: use nag at first to make all packages effecitive <03-11-19> %
+% Fakesubsubsection 编译器
+\RequirePackage{ifxetex}
+\RequireXeTeX
+
+\documentclass[twoside, openright]{report}
+% Fakesection 基础
+% Fakesubsection 文字
+% Fakesubsubsection 颜色
+\usepackage[x11names]{xcolor}
+% XXX: conflict with microtype <02-11-19> %
+% Fakesubsubsection 长度
+\usepackage{printlen}
+\uselengthunit{mm}
+% Fakesubsubsection 效果
+\usepackage{ulem}
+% Fakesubsubsection 字体
+\usepackage[no-math]{fontspec}
+% XXX: use no-math to avoid conflict with mtxlatex <02-11-19> %
+\setmainfont{Times New Roman}
+% XXX: load ctex before siunitx to avoid \ohm ineffective <04-10-19> %
+\usepackage[
+	UTF8,
+	fontset = windows,
+	heading = true,
+	zihao = -4,
+	sub4section,
+]{ctex}
+\setCJKfamilyfont{zhsong}[
+	AutoFakeBold = 2.17,
+	AutoFakeSlant = 0.5,
+]{SimSun}
+\renewcommand*{\songti}{\CJKfamily{zhsong}}
+% XXX: load newtxtext before textcomp to avoid option clash <04-10-19> %
+\usepackage{newtxtext}
+% Fakesubsubsection 字符边框
+\usepackage{varwidth}
+% Fakesubsection 断行
+\usepackage{fvextra}
+% Fakesubsection 标点
+% XXX: load csquotes after fvextra to avoid warning <04-10-19> %
+\usepackage{csquotes}
+% Fakesubsubsection 中文引号
+\DeclareQuoteStyle{zh}
+{\symbol{"201C}}%“
+{\symbol{"201D}}%”
+{\symbol{"2018}}%‘
+{\symbol{"2019}}%’
+\setquotestyle{zh}
+% Fakesubsubsection 日文引号
+\DeclareQuoteStyle{ja}
+{\symbol{"300E}}%『
+{\symbol{"300F}}%』
+{\symbol{"300C}}%「
+{\symbol{"300D}}%」
+% Fakesubsubsection 书名号
+\DeclareQuoteStyle{book}
+{\symbol{"300A}}%《
+{\symbol{"300B}}%》
+{\symbol{"3008}}%〈
+{\symbol{"3009}}%〉
+% Fakesubsection 样式
+% Fakesubsubsection 目录
+\usepackage{titletoc}
+\titlecontents{chapter}[0pt]{\filright}{\contentspush{\thecontentslabel}}{}
+{\titlerule*{.}\contentspage}
+% Fakesubsubsection 章节
+\ctexset{
+	chapter = {
+		name = ,
+		number = \arabic{chapter},
+		aftername = \hspace{1\ccwd},
+		format = \ifthenelse{\value{chapter}=0}{\centering}{}
+		\zihao{3}\heiti\bfseries,
+		beforeskip = 0.5\ccwd,
+		afterskip = 0.5\ccwd,
+	},
+	section = {
+		aftername = \hspace{1\ccwd},
+		format = \ifthenelse{\value{chapter}=0}{\centering}{}
+		\zihao{-3}\heiti\bfseries,
+		beforeskip = 0.5\ccwd,
+		afterskip = 0.5\ccwd,
+	},
+	subsection = {
+		format = \zihao{4}\heiti\bfseries,
+	}
+}
+% Fakesubsubsection 图表
+\usepackage{caption}
+\captionsetup[figure]{labelsep=space}
+\captionsetup[table]{labelsep=space}
+\captionsetup{font=small}
+\DeclareCaptionFont{blue}{\color{LightSteelBlue3}}
+\setlength{\abovecaptionskip}{0.5\ccwd}
+\setlength{\belowcaptionskip}{0.5\ccwd}
+% Fakesubsubsection 子图表
+\usepackage{subcaption}
+% Fakesubsubsection 公式
+\setlength{\abovedisplayskip}{0.5em}
+\setlength{\belowdisplayskip}{0.5em}
+% Fakesubsubsection 列表
+\usepackage{enumitem}
+\setlist[enumerate, 1]{
+	fullwidth,
+	label = (\arabic*),
+	font = \textup,
+	itemindent = 2em,
+}
+\setlist[enumerate, 2]{
+	fullwidth,
+	label = (\alph*),
+	font = \textup,
+	itemindent = 4em,
+}
+% Fakesubsubsection 代码
+% XXX: need -shell-escape & pygmentize <04-10-19> %
+\usepackage{minted}
+\usepackage{boxie}
+% XXX: conflict with fancybox <02-11-19> %
+% Fakesubsubsection 问答
+\usepackage{exercise}
+\usepackage{tasks}
+\renewcommand{\ExerciseName}{问题}
+\renewcommand{\AnswerName}{回答}
+\renewcommand{\listexercisename}{问题}
+% Fakesubsubsection 改动
+
+% Fakesection 插入
+% Fakesubsection 表格
+% Fakesubsubsection 三线
+\usepackage{booktabs}
+% Fakesubsubsection 对角线
+\usepackage{diagbox}
+% Fakesubsubsection 合并列
+\usepackage{multicol}
+% Fakesubsubsection 合并行
+\usepackage{multirow}
+% Fakesubsubsection 分割单元格
+\usepackage{makecell}
+% Fakesubsubsection 短表
+\usepackage{tabu}
+% Fakesubsubsection 长表
+\usepackage{longtable}
+% Fakesubsubsection 彩色表
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\tcbuselibrary{theorems}
+\tcbuselibrary{listings}
+\tcbuselibrary{xparse}
+% XXX: need -shell-escape & pygmentize <04-10-19> %
+\tcbuselibrary{minted}
+% Fakesubsubsection 导入数据
+\usepackage{csvsimple}
+% Fakesubsection 图形
+% Fakesubsubsection 插图
+\usepackage{graphicx}
+\graphicspath{{fig/}{fig/\arabic{chapter}/}}
+% XXX: use '../' to make subfiles can find path <03-11-19> %
+% Fakesubsubsection 环绕
+\usepackage{wrapfig}
+% Fakesubsubsection 图片重叠
+\usepackage{overpic}
+% Fakesubsubsection 徽标
+\usepackage{hologo}
+% Fakesubsubsection 条形码
+\usepackage{ean13isbn}
+% Fakesubsubsection 二维码
+\usepackage{qrcode}
+% Fakesubsection 符号
+% Fakesubsubsection 数学符号
+\usepackage{newtxmath}
+\usepackage{bm}
+% Fakesubsubsection 幻灯片符号
+\usepackage{pifont}
+% Fakesubsubsection 数学符号放缩
+\usepackage{relsize}
+% Fakesubsubsection 公式
+\usepackage{cases}
+\usepackage{physics}
+% Fakesubsubsection 单位
+\usepackage{siunitx}
+\sisetup{mode=text}
+% Fakesubsubsection 计算机
+% Fakesubsection 媒体
+\usepackage{media9}
+% Fakesubsection 链接
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = gray!50!black,
+	citecolor = gray!50!black,
+	backref = page
+}
+% Fakesubsection 批注
+\usepackage{todonotes}
+\usepackage{cooltooltips}
+\usepackage{pdfcomment}
+% Fakesubsection 文本框
+\usepackage{boxedminipage2e}
+% Fakesubsection 页眉页脚
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+	\pagestyle{fancy}
+}
+
+% Fakesection 设计
+% Fakesubsection 水印
+\usepackage{wallpaper}
+% Fakesubsection 音乐
+\usepackage{mtxlatex}
+\mtxlatex
+% Fakesubsection 主题
+
+% Fakesection 布局
+% Fakesubsection 页面
+\usepackage{geometry}
+% Fakesubsection 缩进
+\usepackage{indentfirst}
+% Fakesubsection 间距
+\usepackage{setspace}
+\usepackage[
+	restoremathleading=false,
+	UseMSWordMultipleLineSpacing,
+	MSWordLineSpacingMultiple=1.5
+]{zhlineskip}
+% Fakesection 引用
+% Fakesubsection 脚注
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\thempfootnote}{\fnsymbol{mpfootnote}}
+% Fakesubsection 引文
+\usepackage{morewrites}
+\usepackage[
+	square, comma, numbers, super, sort&compress, longnamesfirst, sectionbib,
+	nonamebreak
+]{natbib}
+% Fakesubsection 题注
+\usepackage{epigraph}
+% Fakesubsection 索引
+\usepackage{makeidx}
+\makeindex
+% Fakesubsection 关联
+% XXX: need amsmath <04-10-19> %
+\numberwithin{Exercise}{chapter}
+\numberwithin{Answer}{chapter}
+
+% Fakesection 特殊功能
+% Fakesubsection 页数统计
+\usepackage{lastpage}
+% Fakesubsection 数学表达式
+\usepackage{calc}
+% Fakesubsection 条件编译
+\usepackage{subfiles}
+% XXX: use subfiles at last to make all packages effecitive <03-11-19> %
+
+\begin{document}
+
+% Fakesection 扉页
+
+\newcommand{\Title}{以华为为例分析跨国公司融资结构}
+
+\begin{titlepage}
+	\centering
+	\makebox[4\ccwd][s]{}
+
+	\textbf{\fontsize{25pt}{\baselineskip}\kaishu{南京理工大学经济管理学院}}
+
+	\vspace{10mm}
+
+	\textbf{\fontsize{33pt}{\baselineskip}\lishu{课程论文}}
+
+	\vspace{20mm}
+
+	\begin{table}[htpb]
+		\centering
+		\songti
+		\zihao{3}
+		\begin{tabu}to.8\linewidth{@{}X[4,r]@{}X[c]@{}X[18,l]@{}}
+			\makebox[4\ccwd][s]{课程名称} & ：                                             &
+			\underline{\makebox[18\ccwd][c]{国际财务管理}}                                   \\
+			\makebox[4\ccwd][s]{论文题目} & ：
+			                              & \underline{\makebox[18\ccwd][c]{\Title}}         \\
+			\makebox[4\ccwd][s]{姓名}     & ：
+			                              & \underline{\makebox[18\ccwd][c]{吴振宇}}         \\
+			\makebox[4\ccwd][s]{学号}     & ：
+			                              & \underline{\makebox[18\ccwd][c]{916101630117}}   \\
+			\makebox[4\ccwd][s]{成绩}     & ：
+			                              & \underline{\makebox[18\ccwd][c]{}}               \\
+			\makebox[4\ccwd][s]{时间}     & ：
+			                              & \underline{\makebox[18\ccwd][c]{\today}}
+		\end{tabu}
+	\end{table}
+
+	\begin{boxedminipage}{\linewidth}
+		\zihao{4}
+
+		任课老师评语：
+
+		\vspace{40mm}
+
+		\begin{flushright}
+			签名： \underline{\makebox[6\ccwd][c]{}}
+
+			年\makebox[2\ccwd][c]{}月\makebox[2\ccwd][c]{}日
+		\end{flushright}
+
+		\vspace{20mm}
+
+	\end{boxedminipage}
+
+\end{titlepage}
+
+% Fakesection 摘要页眉页脚
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[LC, RC]{}
+\fancyhead[LE, RO]{}
+\fancyhead[RE, LO]{}
+\fancyfoot[LC, RC]{}
+\fancyfoot[LE, RO]{}
+\fancyfoot[RE, LO]{}
+
+% Fakesection 摘要
+
+\newpage
+
+\begin{center}
+
+	\vspace{20pt}
+
+	\heiti\zihao{2}\textbf{\Title}
+
+	\vspace{20pt}
+
+	\kaishu\zihao{4}\textbf{916101630117~吴振宇}
+
+\end{center}
+
+\vspace{2em}
+
+{
+
+	\setlength{\baselineskip}{18pt}
+	\kaishu
+
+	\zihao{5}
+	\noindent
+
+	\textbf{摘要：}\hspace{\ccwd}随着我国跨国公司的不断发展壮大，跨国公司数
+	量和质量的不断提高，一些跨国公司存在的共性问题也预演愈烈。为了寻求解决这
+	些问题的方法与对策，并针对跨国公司寻求利益最大化的目标，本文以华为公司为
+	例，从外汇、融资等方面分析了该公司的问题，并给出了最终的建议。
+	\cite{王建英2003国际财务管理学,宋常2001国际财务管理的整体构架,王化成1996国际财务管理目标研究}
+
+	\textbf{关键词}\hspace{\ccwd}外汇管理\hspace{\ccwd}融资结构
+
+	\zihao{5}
+	\noindent
+
+	\textbf{Abstract:}\hspace{1em}With the continuous development and growth
+	of China's multinational companies, the number and quality of
+	multinational companies continue to improve, and some common problems of
+	multinational companies are also increasingly rehearsed. In order to
+	find solutions to these problems, and to maximize the benefits of
+	multinational companies, this paper takes Huawei as an example, analyzes
+	the problems of Huawei from foreign exchange, financing and other
+	aspects, and gives the final recommendations.
+
+	\textbf{Key Words:}\hspace{1em}Exchange Control\hspace{1em}Financing
+	Structure
+
+}
+
+% Fakesection 目录页眉页脚
+
+\newpage
+
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[LC, RC]{\small\leftmark}
+\fancyhead[LE, RO]{第\thepage 页~共~\pageref{LastPage}~页}
+\fancyhead[RE, LO]{\small\rightmark}
+
+% Fakesection 目录
+
+\pagenumbering{roman}
+
+\setcounter{tocdepth}{2}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\pagenumbering{arabic}
+
+% Fakesection 正文
+
+\subfile{subfile/1}
+\subfile{subfile/2}
+\subfile{subfile/3}
+\subfile{subfile/4}
+
+% Fakesection 参考文献
+
+\setcounter{chapter}{0}
+
+\addcontentsline{toc}{chapter}{参考文献}
+
+\bibliographystyle{gbt7714-plain}
+\bibliography{bib/main}
+
+\end{document}
+
